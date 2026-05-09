@@ -1,1 +1,9 @@
-
+[
+  {
+    "id": 1,
+    "restaurant": "Titan Grill",
+    "item": "Burger",
+    "price": 8.99,
+    "available": true
+  }
+]
