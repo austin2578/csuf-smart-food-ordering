@@ -1,9 +1,8 @@
 [
-  {
-    "id": 1,
-    "restaurant": "Titan Grill",
-    "item": "Burger",
-    "price": 8.99,
-    "available": true
-  }
+  { "id": 1, "restaurant": "Titan Grill", "item": "Burger", "price": 8.99, "available": true },
+  { "id": 2, "restaurant": "Titan Grill", "item": "Chicken Bowl", "price": 10.99, "available": true },
+  { "id": 3, "restaurant": "Starbucks", "item": "Coffee", "price": 4.50, "available": true },
+  { "id": 4, "restaurant": "Starbucks", "item": "Breakfast Sandwich", "price": 6.75, "available": true },
+  { "id": 5, "restaurant": "Panda Express", "item": "Orange Chicken Bowl", "price": 11.25, "available": true },
+  { "id": 6, "restaurant": "Panda Express", "item": "Fried Rice", "price": 4.25, "available": true }
 ]
