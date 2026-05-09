@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSUF Smart Food Ordering</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <div>
+        <p class="eyebrow">CPSC 464 Architecture Prototype</p>
+        <h1>CSUF Smart Food Ordering</h1>
+        <p class="subtitle">A role-based food ordering demo using Menu, Order, and Notification microservices.</p>
+      </div>
+      <div class="service-card">
+        <span>Local Services</span>
+        <strong>3001 / 3002 / 3003</strong>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="roleScreen" class="panel role-panel">
+      <h2>How are you using the system?</h2>
+      <p>Choose a role to see the correct interface. No accounts are needed for this prototype.</p>
+      <div class="role-grid">
+        <button class="role-choice" onclick="setRole('customer')">
+          <span class="role-icon">🍽️</span>
+          <strong>Customer</strong>
+          <small>Browse restaurants, select items, place orders, and view your order history.</small>
+        </button>
+        <button class="role-choice" onclick="setRole('merchant')">
+          <span class="role-icon">🏪</span>
+          <strong>Merchant</strong>
+          <small>Manage menu items, view all orders, and update order status.</small>
+        </button>
+      </div>
+    </section>
+
+    <section id="appScreen" class="hidden app-layout">
+      <div class="toolbar">
+        <div>
+          <strong id="currentRoleLabel">Current Role</strong>
+          <p id="roleDescription"></p>
+        </div>
+        <button class="secondary" onclick="changeRole()">Switch Role</button>
+      </div>
+
+      <section class="panel wide">
+        <div class="section-header">
+          <div>
+            <h2>Campus Menus</h2>
+            <p>Restaurants are grouped for quick browsing.</p>
+          </div>
+          <button onclick="loadMenu()">Refresh Menu</button>
+        </div>
+        <div id="menuList" class="menu-grid"></div>
+      </section>
+
+      <section id="customerPanel" class="content-grid">
+        <section class="panel">
+          <h2>Place an Order</h2>
+          <p class="muted">Enter your name, choose a restaurant, then tap items to add them to your order.</p>
+
+          <label for="customerName">Customer Name</label>
+          <input id="customerName" placeholder="Example: Alex" oninput="loadCustomerOrders()" />
+
+          <label for="restaurantSelect">Restaurant</label>
+          <select id="restaurantSelect" onchange="loadRestaurantItems()">
+            <option value="">Select a restaurant</option>
+          </select>
+
+          <div id="orderItemList" class="order-item-list">
+            <p class="muted">Select a restaurant to view menu items.</p>
+          </div>
+
+          <div class="total-row">
+            <span>Selected Total</span>
+            <strong id="selectedTotal">$0.00</strong>
+          </div>
+
+          <button class="full-width primary-action" onclick="placeOrder()">Place Order</button>
+        </section>
+
+        <section class="panel">
+          <div class="section-header compact">
+            <div>
+              <h2>My Order History</h2>
+              <p>Shows orders matching the customer name.</p>
+            </div>
+            <button class="secondary" onclick="loadCustomerOrders()">Refresh</button>
+          </div>
+          <div id="customerOrderHistory" class="history-list empty-state">Enter a customer name to view orders.</div>
+        </section>
+      </section>
+
+      <section id="merchantPanel" class="content-grid hidden">
+        <section class="panel">
+          <h2>Add Menu Item</h2>
+          <p class="muted">This simulates vendor menu management.</p>
+
+          <label for="restaurant">Restaurant</label>
+          <input id="restaurant" placeholder="Example: Titan Grill" />
+
+          <label for="item">Item</label>
+          <input id="item" placeholder="Example: Chicken Bowl" />
+
+          <label for="price">Price</label>
+          <input id="price" type="number" step="0.01" placeholder="Example: 10.99" />
+
+          <button class="full-width" onclick="addMenuItem()">Add Menu Item</button>
+        </section>
+
+        <section class="panel">
+          <div class="section-header compact">
+            <div>
+              <h2>Update Order Status</h2>
+              <p>Select an active order instead of typing an ID.</p>
+            </div>
+            <button class="secondary" onclick="loadOrders()">Refresh Orders</button>
+          </div>
+
+          <label for="orderSelect">Current Orders</label>
+          <select id="orderSelect">
+            <option value="">Load orders first</option>
+          </select>
+
+          <label for="status">New Status</label>
+          <select id="status">
+            <option value="PLACED">PLACED</option>
+            <option value="PREPARING">PREPARING</option>
+            <option value="READY">READY</option>
+            <option value="COMPLETED">COMPLETED</option>
+          </select>
+
+          <button class="full-width primary-action" onclick="updateOrderStatus()">Update Status</button>
+        </section>
+
+        <section class="panel wide">
+          <div class="section-header compact">
+            <div>
+              <h2>Merchant Order History</h2>
+              <p>All orders currently stored by the Order Service.</p>
+            </div>
+            <button class="secondary" onclick="loadOrders()">Refresh</button>
+          </div>
+          <div id="merchantOrderHistory" class="history-list empty-state">No orders loaded yet.</div>
+        </section>
+      </section>
+
+      <section class="panel wide">
+        <h2>API Response</h2>
+        <pre id="responseBox">Responses will appear here...</pre>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
